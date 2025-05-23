@@ -8,6 +8,7 @@ import io.ktor.client.HttpClient
 import io.ktor.client.request.get
 import io.ktor.client.statement.HttpResponse
 import java.net.ConnectException
+import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 import java.nio.channels.UnresolvedAddressException
 
@@ -30,18 +31,17 @@ class ServerStatusRepositoryImpl(
             } else {
                 ServerStatus.Down("HTTP ${statusCode.value} ${statusCode.description}")
             }
-        } catch (e: UnknownHostException) {
-            Log.e("Network", "Unknown host: ${e.message}")
-            ServerStatus.Unreachable
-        } catch (e: UnresolvedAddressException) {
-            Log.e("Network", "Unresolved address: ${e.message}")
-            ServerStatus.Unreachable
-        } catch (e: ConnectException) {
-            Log.e("Network", "Connection refused: ${e.message}")
-            ServerStatus.Unreachable
         }catch (e: Exception) {
-            Log.e(TAG, "Error contacting server", e)
-            ServerStatus.Down("Exception: ${e.message}")
+            Log.e("Network", "${e.localizedMessage}")
+            return when (e) {
+                is UnknownHostException -> ServerStatus.Unreachable
+                is UnresolvedAddressException -> ServerStatus.Unreachable
+                is SocketTimeoutException -> ServerStatus.Unreachable
+                is ConnectException -> ServerStatus.Down("Exception: ${e.message}") // Maybe server but can be user problem
+                else -> {
+                    ServerStatus.Down("Exception: ${e.message}")
+                }
+            }
         }
     }
 }
