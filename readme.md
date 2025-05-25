@@ -3,7 +3,7 @@ A simple Android app that monitors the status of a server. Every 15 minutes, a b
 
 ## ⭐️Features
 - ⏱️ Periodic server checks every 15 minutes using WorkManager
-- 🔔 Push notifications if the server is down or unreachable
+- 🔔 Push notifications if the server is down
 - 🟢 Clean UI showing the current status (UP / DOWN / UNREACHABLE)
 - 🌙 Works in the background even when the app is closed
 
