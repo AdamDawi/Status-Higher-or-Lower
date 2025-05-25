@@ -25,6 +25,10 @@ git clone https://github.com/AdamDawi/Status-Higher-or-Lower
 ```
 2. Open the project in Android Studio.
 3. Be sure the versions in gradle are same as on github
+4. Add the server URL to your local gradle.properties file as follows:
+```properties
+SERVER_URL="https://test.com"
+```
 
 ## Requirements
 Minimum version: Android 7.0 (API level 24) or later📱
