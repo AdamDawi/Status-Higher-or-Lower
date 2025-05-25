@@ -1,5 +1,5 @@
 # <img src="https://github.com/user-attachments/assets/b470d2ae-4dd1-4e4a-9b72-4f362bb2b9e8" width="60" height="60" align="center" /> Server Status - Higher Or Lower
-A simple Android app that monitors the status of a server. Every 15 minutes, a background worker sends a request to a specified server link. If no response is received, the app notifies the user that the server is down.
+A simple Android app that monitors the status of a server. Every 15 minutes, a background worker sends a request to a specified server link. If no response is received or server responds incorrectly, the app notifies the user that the server is down.
 
 ## ⭐️Features
 - ⏱️ Periodic server checks every 15 minutes using WorkManager
